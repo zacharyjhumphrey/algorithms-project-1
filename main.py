@@ -1,3 +1,3 @@
-import np
+import numpy
 
 print('hello world')
