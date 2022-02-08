@@ -1,8 +1,7 @@
-import unittest
+# content of test_sample.py
+def func(x):
+    return x + 1
 
-from src.example import Example
 
-
-class TestExample(unittest.TestCase):
-    def test_value(self):
-        self.assertEqual(Example(), 7)
+def test_answer():
+    assert func(4) == 5

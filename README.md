@@ -7,7 +7,7 @@ pip
 
 # # run tests
 
-python -m unittest discover
+pytest
 
 # # running the project
 
