@@ -1,5 +1,9 @@
 # algorithms-project-1
 
+# # specifications
+
+using black format style
+
 # # requirements
 
 python3
@@ -7,7 +11,7 @@ pip
 
 # # run tests
 
-pytest
+python -m pytest tests
 
 # # running the project
 
