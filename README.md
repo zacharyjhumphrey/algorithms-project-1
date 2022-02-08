@@ -5,6 +5,10 @@
 python3
 pip
 
+# # run tests
+
+python -m unittest discover
+
 # # running the project
 
 # # # creating virtual environment
