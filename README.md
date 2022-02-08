@@ -1,5 +1,9 @@
 # algorithms-project-1
 
+## google meet link!
+
+https://meet.google.com/eyn-efvr-snn
+
 ## contributing
 
 create a fork of this repository
