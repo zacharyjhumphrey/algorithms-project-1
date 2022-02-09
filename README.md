@@ -1,5 +1,7 @@
 # algorithms-project-1
 
+## link to detailed report:
+
 ## contributing
 
 create a fork of this repository
@@ -16,7 +18,7 @@ using black format style
 python3
 pip
 
-## run tests
+### run tests
 
 python -m pytest tests
 
