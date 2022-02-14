@@ -1,5 +1,8 @@
 # algorithms-project-1
 
+## google meet link!
+https://meet.google.com/eyn-efvr-snn
+
 ## link to detailed report:
 
 ## contributing
