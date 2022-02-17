@@ -115,10 +115,10 @@ As the owner of the keys, what would you like to do?
 main()
 
 def convert_character_to_number(character):
-    return ord(character) - 96; #delftStack for ord function information
+    return ord(character); #delftStack for ord function information
 
 def convert_number_to_character(number):
-    return chr(number + 96) #geeks for geeks chr function information (test this function. I'm not sure if this will work)
+    return chr(number) #geeks for geeks chr function information (test this function. I'm not sure if this will work)
 
 def generate_prime_number():
     return 0
