@@ -62,9 +62,10 @@ def generate_digital_signature(msg: AnyStr, private_key: tuple) -> int:
     return pow(msg, private_key[1], private_key[0]) # probably incorrect
 
 
-def authenticate_signature(msg: AnyStr, public_key: tuple, signature: int) -> AnyStr:
-    return pow(signature, public_key[1], public_key[0]) # probably incorrect
+def authenticate_signature(msg: AnyStr, public_key: tuple, signature: int) -> bool:
+    m = pow(signature, public_key[1], public_key[0]) 
 
+    return m == msg # probably incorrect
 
 def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:
     return (prime_1 - 1) * (prime_2 - 1)
