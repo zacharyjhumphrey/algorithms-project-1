@@ -1,14 +1,19 @@
+from typing import AnyStr
 
+<<<<<<< HEAD
 from tkinter import N
 import random as rnd
 
 
 def convert_character_to_number(character):
     return ord(character) #delftStack for ord function information
+=======
+>>>>>>> dev
 
-def convert_number_to_character(number):
-    return chr(number) #geeks for geeks chr function information (test this function. I'm not sure if this will work)
+def __convert_character_to_number(character: int):
+    return ord(character)  # delftStack for ord function information
 
+<<<<<<< HEAD
 def generate_prime_number():
     while (True):
         n = rnd.randint(100000, 1000000)
@@ -22,40 +27,61 @@ def generate_prime_number():
                     continue
             if (len(tested) == 8):
                 return n
+=======
 
-def generate_public_key(p, q):
+def __convert_number_to_character(number: int) -> AnyStr:
+    # geeks for geeks chr function information (test this function. I'm not sure if this will work)
+    return chr(number)
+
+
+def generate_prime_number() -> int:
+    return 0
+>>>>>>> dev
+
+
+def generate_public_key(p: int, q: int) -> tuple:
     return 0
 
-def generate_private_key(e, phi_N):
+
+def generate_private_key(e: int, phi_N: int) -> tuple:
     return 0
 
-def encrypt_message(public_key, message_to_encrypt):
-    encrypted = []
 
-    for i in range(len(message_to_encrypt)):
-       encrypted[i] = pow(convert_character_to_number(message_to_encrypt[i]), public_key[0], public_key[1])
-    
-    return encrypted
+def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
+    # TODO Code review
+    # TODO Need to add private key?
+    return [
+        pow(
+            __convert_character_to_number(num), public_key[0]) % public_key[1]
+        for num in message_to_encrypt
+    ]
 
-def decrypt_message(private_key, message_to_decrypt):
-    encrypted = []
 
-    for i in range(len(message_to_decrypt)):
-        encrypted[i] = convert_number_to_character(pow(message_to_decrypt[i], private_key[0], private_key[1]))
+def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr:
+    return [  # TODO Code review. dont think this logic is right
+        pow(
+            __convert_number_to_character(num), private_key[0]) % private_key[1]
+        for num in message_to_decrypt
+    ]
 
-    return encrypted
 
-def generate_digital_signature(msg, private_key):
+def generate_digital_signature(msg, private_key) -> tuple:
+    # TODO type message, but will it be a string or list of numbers
     return 0
 
-def authenticate_signature(msg, public_key, private_key):
-    return 0
 
-def get_count_coprime_number_count(prime_1, prime_2):
+def authenticate_signature(msg: AnyStr, public_key: tuple, private_key: tuple) -> bool:
+    return False
+
+
+def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:
     return (prime_1 - 1) * (prime_2 - 1)
 
-def is_coprime(number_to_check_if_coprime, N):
-    return True
 
+<<<<<<< HEAD
 def is_prime(a, n):
     return pow(a,n-1,n) == 1
+=======
+def is_coprime(number_to_check_if_coprime: int, N: int) -> bool:
+    return True
+>>>>>>> dev
