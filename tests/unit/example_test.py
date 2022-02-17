@@ -1,4 +1,6 @@
 # from src import Example
+import pytest
+
 
 def test_convert_character_to_number():
     pass
@@ -11,7 +13,17 @@ def test_convert_character_to_number():
 
 
 def test_generate_prime_number():
-    pass
+    # TODO Depends on is potentially prime passing
+    for i in range(20):
+        try:
+            prime = generate_prime_number(80, 130)
+            for i in range(2, int(prime / 2)):
+                if prime % i == 0:
+                    print(f'generated prime is {prime}')
+                    raise Exception
+        except Exception:
+            pytest.fail(
+                "Test generate prime number has returned a prime number")
 
 
 def test_generate_public_key():
