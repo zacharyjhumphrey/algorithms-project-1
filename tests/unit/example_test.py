@@ -4,16 +4,13 @@ from backend import *
 
 def test_generate_prime_number():
     # TODO Depends on is potentially prime passing
-    # for i in range(4):
-    try:
+    for i in range(20):
         prime = generate_prime_number(80, 130)
         for i in range(2, int(prime / 2)):
             if prime % i == 0:
                 print(f'generated prime is {prime}')
-                raise Exception
-    except Exception:
-        pytest.fail("Unexpected Exception ..")
-
+                pytest.fail(
+                    "Test generate prime number has returned a prime number")
 
 # def test_generate_public_key():
 #     pass

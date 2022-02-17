@@ -1,5 +1,4 @@
 from typing import AnyStr
-from tkinter import N
 import random as rnd
 
 
@@ -26,7 +25,8 @@ def generate_prime_number(lower_bound: int = 100000, upper_bound: int = 1000000)
                 break
 
             tested.add(a)
-        return n
+        if len(tested) == 8:
+            return n
 
 
 def generate_n(p: int, q: int) -> tuple:
@@ -40,7 +40,8 @@ def generate_public_key(n: tuple) -> tuple:
             if (is_coprime(rand, n[1])):
                 return rand, n[0]
         tested.add(rand)
-    
+
+
 def generate_private_key(e: int, n: tuple) -> tuple:
     return extended_gcd(e, n[1])[1], n[1]
 
@@ -65,6 +66,15 @@ def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr
 
 def generate_digital_signature(msg: AnyStr, private_key: tuple) -> int:
     # TODO type message, but will it be a string or list of numbers
+    return pow(msg, private_key[1], private_key[0])  # probably incorrect
+
+
+def authenticate_signature(msg: AnyStr, public_key: tuple, signature: int) -> bool:
+    m = pow(signature, public_key[1], public_key[0])
+
+    return m == msg  # probably incorrect
+
+
     return pow(msg, private_key[1], private_key[0]) # probably incorrect
 
 
@@ -86,18 +96,20 @@ def is_coprime(number_to_check_if_coprime: int, N: int) -> bool:
         return True
     return False
 
+
 def gcd(a: int, b: int) -> int:
     if (a < b):
         return gcd(b, a)
     if (a == 0):
         return b
-    return gcd(b, a%b)
+    return gcd(b, a % b)
+
 
 def extended_gcd(a: int, b: int) -> tuple:
     if (a == 0):
         return b, 0, 1
-    
-    gcd, x1, y1 = extended_gcd(b%a, a)
+
+    gcd, x1, y1 = extended_gcd(b % a, a)
 
     x = y1 - (b//a) * x1
     y = x1
