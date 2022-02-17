@@ -1,8 +1,9 @@
 # algorithms-project-1
 
 ## google meet link!
-
 https://meet.google.com/eyn-efvr-snn
+
+## link to detailed report:
 
 ## contributing
 
@@ -20,7 +21,7 @@ using black format style
 python3
 pip
 
-## run tests
+### run tests
 
 python -m pytest tests
 
