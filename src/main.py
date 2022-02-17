@@ -1,3 +1,4 @@
+from typing import AnyStr
 import numpy
 
 # stores messages before encryption and after decryption
@@ -45,10 +46,10 @@ As a public user, what would you like to do?
             # moves from decrypted to encrypted with basic encryption tester
             encrypted_msgs.append(decrypted_msgs.pop(
                 decrypted_msgs.count(str) - 1))
-            
+
             # TODO add call to run encryption on last decrypted message added
             print("message encrypted and sent.")
-            
+
         # checks for signatures
         elif option == "2":
             if signatures == []:
@@ -63,7 +64,7 @@ As a public user, what would you like to do?
                 print(selected_sig)
 
             # TODO add call to verify signature
-            
+
         elif option == "3":
             break
         else:
@@ -89,12 +90,13 @@ As the owner of the keys, what would you like to do?
                 print("There are no messages available.")
             else:
                 print("The following messages are available:")
-                
+
                 # display encrypted Messages by length
                 print(
                     [f'\t{encrypted_msgs.index(s)+1} . (length = {len(s)})\n' for s in encrypted_msgs])
-                
-                selected_msg = encrypted_msgs[int(input("Enter your choice: "))-1]
+
+                selected_msg = encrypted_msgs[int(
+                    input("Enter your choice: "))-1]
 
                 # TODO insert call to decryption method
                 print(selected_msg)
