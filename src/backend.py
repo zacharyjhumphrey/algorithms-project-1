@@ -1,20 +1,15 @@
 from typing import AnyStr
-
-<<<<<<< HEAD
 from tkinter import N
 import random as rnd
 
 
-def convert_character_to_number(character):
+def __convert_character_to_number(character: int) -> int:
     return ord(character) #delftStack for ord function information
-=======
->>>>>>> dev
 
-def __convert_character_to_number(character: int):
-    return ord(character)  # delftStack for ord function information
+def __convert_number_to_character(number: int) -> int:
+    return chr(number) # geeks for geeks chr function information (test this function. I'm not sure if this will work)
 
-<<<<<<< HEAD
-def generate_prime_number():
+def generate_prime_number() -> int:
     while (True):
         n = rnd.randint(100000, 1000000)
         tested = set()
@@ -27,17 +22,6 @@ def generate_prime_number():
                     continue
             if (len(tested) == 8):
                 return n
-=======
-
-def __convert_number_to_character(number: int) -> AnyStr:
-    # geeks for geeks chr function information (test this function. I'm not sure if this will work)
-    return chr(number)
-
-
-def generate_prime_number() -> int:
-    return 0
->>>>>>> dev
-
 
 def generate_public_key(p: int, q: int) -> tuple:
     return 0
@@ -78,10 +62,8 @@ def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:
     return (prime_1 - 1) * (prime_2 - 1)
 
 
-<<<<<<< HEAD
-def is_prime(a, n):
+def is_prime(a: int, n: int) -> bool:
     return pow(a,n-1,n) == 1
-=======
+
 def is_coprime(number_to_check_if_coprime: int, N: int) -> bool:
     return True
->>>>>>> dev
