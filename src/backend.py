@@ -14,7 +14,7 @@ def convert_number_to_character(number: int) -> int:
 
 def generate_prime_number(lower_bound: int = 100000, upper_bound: int = 1000000) -> int:
     while (True):
-        n = 106  # rnd.randint(lower_bound, upper_bound)
+        n = rnd.randint(lower_bound, upper_bound)
         tested = set()
         while len(tested) < 9:
             a = rnd.randint(2, n - 2)
@@ -31,7 +31,6 @@ def generate_prime_number(lower_bound: int = 100000, upper_bound: int = 1000000)
 
 def generate_n(p: int, q: int) -> tuple:
     return p * q, get_count_coprime_number_count(p, q)
-
 
 def generate_public_key(n: tuple) -> tuple:
     while (True):
@@ -75,6 +74,14 @@ def authenticate_signature(msg: AnyStr, public_key: tuple, signature: int) -> bo
 
     return m == msg  # probably incorrect
 
+
+    return pow(msg, private_key[1], private_key[0]) # probably incorrect
+
+
+def authenticate_signature(msg: AnyStr, public_key: tuple, signature: int) -> bool:
+    m = pow(signature, public_key[1], public_key[0]) 
+
+    return m == msg # probably incorrect
 
 def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:
     return (prime_1 - 1) * (prime_2 - 1)
