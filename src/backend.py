@@ -1,5 +1,4 @@
 from typing import AnyStr
-from tkinter import N
 import random as rnd
 
 
