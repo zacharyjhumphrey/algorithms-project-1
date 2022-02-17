@@ -5,11 +5,14 @@ def test_convert_character_to_number():
     # assert __convert_character_to_number('a') == 1
     # assert __convert_character
 
+
 def test_convert_character_to_number():
     pass
 
+
 def test_generate_prime_number():
     pass
+
 
 def test_generate_public_key():
     pass
@@ -41,7 +44,6 @@ def test_get_count_coprime_number_count(prime_1, prime_2):
 
 def test_is_coprime(number_to_check_if_coprime, N):
     pass
-
 
 
 # def test_test_failing():

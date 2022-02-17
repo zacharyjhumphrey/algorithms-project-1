@@ -1,3 +1,4 @@
+from typing import AnyStr
 import numpy
 
 # stores messages before encryption and after decryption
@@ -45,10 +46,10 @@ As a public user, what would you like to do?
             # moves from decrypted to encrypted with basic encryption tester
             encrypted_msgs.append(decrypted_msgs.pop(
                 decrypted_msgs.count(str) - 1))
-            
+
             # TODO add call to run encryption on last decrypted message added
             print("message encrypted and sent.")
-            
+
         # checks for signatures
         elif option == "2":
             if signatures == []:
@@ -63,7 +64,7 @@ As a public user, what would you like to do?
                 print(selected_sig)
 
             # TODO add call to verify signature
-            
+
         elif option == "3":
             break
         else:
@@ -89,12 +90,13 @@ As the owner of the keys, what would you like to do?
                 print("There are no messages available.")
             else:
                 print("The following messages are available:")
-                
+
                 # display encrypted Messages by length
                 print(
                     [f'\t{encrypted_msgs.index(s)+1} . (length = {len(s)})\n' for s in encrypted_msgs])
-                
-                selected_msg = encrypted_msgs[int(input("Enter your choice: "))-1]
+
+                selected_msg = encrypted_msgs[int(
+                    input("Enter your choice: "))-1]
 
                 # TODO insert call to decryption method
                 print(selected_msg)
@@ -114,46 +116,68 @@ As the owner of the keys, what would you like to do?
 # functions unless option 3 is selected while in the main menu
 main()
 
-def convert_character_to_number(character):
-    return ord(character); #delftStack for ord function information
 
-def convert_number_to_character(number):
-    return chr(number) #geeks for geeks chr function information (test this function. I'm not sure if this will work)
+def __convert_character_to_number(character):
+    return ord(character)  # delftStack for ord function information
+
+
+def __convert_number_to_character(number):
+    # geeks for geeks chr function information (test this function. I'm not sure if this will work)
+    return chr(number)
+
 
 def generate_prime_number():
     return 0
 
+
 def generate_public_key(p, q):
     return 0
+
 
 def generate_private_key(e, phi_N):
     return 0
 
-def encrypt_message(public_key, message_to_encrypt):
-    encrypted = []
+# TODO Code review
+# TODO Need to add private key?
 
-    for i in range(len(message_to_encrypt)):
-       encrypted[i] = pow(convert_character_to_number(message_to_encrypt[i]), public_key[0], public_key[1])
-    
-    return encrypted
 
-def decrypt_message(private_key, message_to_decrypt):
-    encrypted = []
+def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr):
+    return [
+        pow(
+            __convert_character_to_number(num), public_key[0]) % public_key[1]
+        for num in message_to_encrypt
+    ]
 
-    for i in range(len(message_to_decrypt)):
-        encrypted[i] = convert_number_to_character(pow(message_to_decrypt[i], private_key[0], private_key[1]))
 
-    return encrypted
+def decrypt_message(private_key: tuple, message_to_decrypt: list[int]):
+    return [  # TODO Code review. dont think this logic is right
+        pow(
+            __convert_number_to_character(num), private_key[0]) % private_key[1]
+        for num in message_to_decrypt
+    ]
+
 
 def generate_digital_signature(msg, private_key):
     return 0
 
-def authenticate_signature(msg, public_key, private_key):
+
+def authenticate_signature(msg, public_key: tuple, private_key: tuple):
     return 0
 
-def get_count_coprime_number_count(prime_1, prime_2):
+
+def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:
+    """
+    get_count_coprime_number_count returns the count of numbers that are coprime to both primes
+
+    Args:
+        prime_1 (int): _description_
+        prime_2 (int): _description_
+
+    Returns:
+        int: _description_
+    """
     return (prime_1 - 1) * (prime_2 - 1)
+
 
 def is_coprime(number_to_check_if_coprime, N):
     return True
-
