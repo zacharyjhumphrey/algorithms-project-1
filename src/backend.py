@@ -2,12 +2,12 @@ from typing import AnyStr
 import random as rnd
 
 
-def convert_character_to_number(character: int) -> int:
-    return ord(character)
+def convert_character_to_number(character: AnyStr) -> int:
+    return ord(character) - ord('A') + 1
 
 
 def convert_number_to_character(number: int) -> int:
-    return chr(number)
+    return chr(number + 64)
 
 
 def generate_prime_number(lower_bound: int = 100000, upper_bound: int = 1000000) -> int:
@@ -22,41 +22,69 @@ def generate_n(p: int, q: int) -> tuple:
 
 
 def generate_public_key(n: tuple) -> tuple:
-    # TODO test
-    while (True):
-        rand = rnd.randint(2, n[1])
-        tested = set()
-        if rand not in tested and is_coprime(rand, n[1]):
-            return rand, n[0]
-        tested.add(rand)
+    N, phi_N = n
+    tested = set()
+    while True:
+        e = rnd.randint(2, phi_N)
+        if e not in tested and is_coprime(e, N) and is_coprime(e, phi_N):
+            return e, N
+        tested.add(e)
 
 
 def generate_private_key(e: int, n: tuple) -> tuple:
     # TODO test
-    return extended_gcd(e, n[1])[1], n[1]
+    return extended_gcd(e, n[1])[1], n[0]
 
 
 def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
+    """
+    encrypt_message _summary_
+
+    Args:
+        public_key (tuple): key known by all clients
+        message_to_encrypt (AnyStr): _description_
+
+    Returns:
+        list[int]: _description_
+    """
     # TODO Code review
     # TODO Need to add private key?
     # TODO test
     return [
         pow(
-            convert_character_to_number(num), public_key[0]) % public_key[1]
+            convert_character_to_number(num), public_key[0], public_key[1])
         for num in message_to_encrypt
     ]
 
 
 def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr:
     # TODO Code review. dont think this logic is right
-    return [
-        pow(
-            convert_number_to_character(num), private_key[0]) % private_key[1]
-        for num in message_to_decrypt
-    ]
+    msg = ""
+    for num in message_to_decrypt:
+        msg = msg + \
+            convert_number_to_character(
+                pow(num, private_key[0], private_key[1]))
+    return msg
+    # return [
+    #     convert_number_to_character(
+    #         pow(num, private_key[0], private_key[1])
+    #     )
+    #     for num in message_to_decrypt
+    # ]
 
 
 def generate_digital_signature(msg: AnyStr, private_key: tuple) -> int:
+    """
+    generate_digital_signature creates a signature for the owner of keys
+    This is used to to verify whether or not a message is verified.
+
+    Args:
+        msg (AnyStr): message used to create signature
+        private_key (tuple): key from the user that created the message
+
+    Returns:
+        int: TODO
+    """
     # TODO type message, but will it be a string or list of numbers
     # TODO test
     return pow(msg, private_key[1], private_key[0])  # probably incorrect
@@ -75,7 +103,7 @@ def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:
 def is_potentially_prime(a: int, n: int) -> bool:
     """
     is_potentially_prime is used to compute whether or not a number is prime.
-    This function is correct about 50% of the time. Called multiple times with 
+    This function is correct about 50% of the time. Called multiple times with
     a different a value, this method can nearly assure that a number is prime.
 
     Args:
@@ -118,30 +146,8 @@ def gcd(a: int, b: int) -> int:
 
 def extended_gcd(a: int, b: int) -> tuple:
     # TODO test
-    if (a == 0):
+    if a == 0:
         return b, 0, 1
-
-    gcd, x1, y1 = extended_gcd(b % a, a)
-
-    x = y1 - (b//a) * x1
-    y = x1
-
-    return gcd, x, y
-
-
-# def get_factors(n: int) -> set[int]:
-#     ans = []
-#     if n == 1:
-#         return 1
-
-#     if n % 2 == 0:
-#         ans.append(n / 2)
-#         ans.append(get_factors(n / 2))
-#     if n % 3 == 0:
-#         ans.append(n / 3)
-#         ans.append(get_factors(n / 3))
-
-#     return ans
-
-
-# print(get_factors(6))
+    else:
+        gcd, x, y = extended_gcd(b % a, a)
+        return gcd, y - (b // a) * x, x

@@ -1,6 +1,7 @@
 # algorithms-project-1
 
 ## google meet link!
+
 https://meet.google.com/eyn-efvr-snn
 
 ## link to detailed report:
@@ -26,6 +27,8 @@ pip
 python -m pytest tests
 
 ## running the project
+
+pip install -e .
 
 ### creating virtual environment
 

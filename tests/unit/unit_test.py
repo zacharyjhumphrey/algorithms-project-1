@@ -28,25 +28,18 @@ def test_generate_prime_number():
     for i in range(20):
         prime = generate_prime_number(80, 130)
         for i in range(2, int(prime / 2)):
-            if prime % i == 0:
-                pytest.fail(
-                    "Test generate prime number has returned a prime number")
+            assert prime % i != 0
 
 
 def test_generate_n():
-    try:
-        test = generate_n(2, 7)
-        if (test[0] != 14):
-            raise Exception
-        if (test[1] != 6):
-            raise Exception
-        pass
-    except Exception:
-        pytest.fail("Unexpected Exception ..")
+    assert generate_n(2, 7) == (14, 6)
 
 
 def test_generate_public_key():
-    pass
+    n = generate_n(2, 7)
+    key = generate_public_key(n)
+    assert key == (5, 14)
+
 
 # def test_generate_private_key(e, phi_N):
 #     return 0
