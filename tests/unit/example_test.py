@@ -1,6 +1,7 @@
 import pytest
 from backend import *
 
+
 def test_convert_character_to_number():
     try:
         test = convert_character_to_number('A')
@@ -9,7 +10,10 @@ def test_convert_character_to_number():
         pass
     except Exception:
         pytest.fail("Unexpected Exception ..")
+
+
 test_convert_character_to_number()
+
 
 def test_convert_number_to_character():
     try:
@@ -19,20 +23,20 @@ def test_convert_number_to_character():
         pass
     except Exception:
         pytest.fail("Uncexpected Exception ..")
+
+
 test_convert_number_to_character()
+
 
 def test_generate_prime_number():
     # TODO Depends on is potentially prime passing
-    # for i in range(4):
-    try:
+    for i in range(20):
         prime = generate_prime_number(80, 130)
         for i in range(2, int(prime / 2)):
             if prime % i == 0:
-                print(f'generated prime is {prime}')
-                raise Exception
-    except Exception:
-        pytest.fail("Unexpected Exception ..")
-test_generate_prime_number()
+                pytest.fail(
+                    "Test generate prime number has returned a prime number")
+
 
 def test_generate_n():
     try:
@@ -44,7 +48,6 @@ def test_generate_n():
         pass
     except Exception:
         pytest.fail("Unexpected Exception ..")
-test_generate_n()
 
 # def test_generate_public_key():
 #       pass
@@ -64,6 +67,7 @@ test_generate_n()
 # def test_authenticate_signature(msg, public_key, private_key):
 #     pass
 
+
 def test_get_count_coprime_number_count():
     try:
         test = get_count_coprime_number_count(2, 7)
@@ -72,7 +76,10 @@ def test_get_count_coprime_number_count():
         pass
     except Exception:
         pytest.fail("Unexpected Exception ..")
+
+
 test_get_count_coprime_number_count()
+
 
 def test_is_potentially_prime():
     try:
@@ -83,6 +90,8 @@ def test_is_potentially_prime():
         pass
     except Exception:
         pytest.fail("Unexpected Exception ..")
+
+
 test_is_potentially_prime()
 
 # def test_is_coprime(number_to_check_if_coprime, N):
