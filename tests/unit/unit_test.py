@@ -35,16 +35,11 @@ def test_generate_n():
     assert generate_n(2, 7) == (14, 6)
 
 
-<<<<<<< HEAD:tests/unit/unit_test.py
 def test_generate_public_key():
     n = generate_n(2, 7)
     key = generate_public_key(n)
     assert key == (5, 14)
 
-=======
-# def test_generate_public_key():
-#     pass
->>>>>>> a919acd29146d4413dfb89aaef9d2b023207084b:tests/unit/example_test.py
 
 # def test_generate_private_key(e, phi_N):
 #     return 0
@@ -57,6 +52,7 @@ def test_encrypt_message():
         pass
     except Exception:
         pytest.fail("Unexpected Exception ..")
+
 
 def test_decrypt_message():
     try:
