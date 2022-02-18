@@ -1,5 +1,11 @@
-import pytest
 from backend import *
+import random as rnd
+import pytest
+
+# def test_convert_character_to_number():
+#     pass
+#     # assert __convert_character_to_number('a') == 1
+#     # assert __convert_character
 
 
 def test_convert_character_to_number():
@@ -105,6 +111,28 @@ test_is_potentially_prime()
 
 # def test_extended_gcd():
 #     pass
+
+def test_gcd():
+    for i in range(10):
+        x = rnd.randint(2, 70)
+        y = x * rnd.randint(2, 70)
+        assert gcd(x, y) == x
+
+    for i in range(10):
+        x = rnd.randint(2, 70)
+        y = 2 * rnd.randint(2, 70)
+        z = 3 * rnd.randint(2, 70)
+        assert gcd(z, y) == x
+
+
+def test_gcd_with_prime_numbers():
+    for i in range(10):
+        x = generate_prime_number(80, 300)
+        y = 0
+        while y != x:
+            y = rnd.randint(80, 300)
+        assert gcd(x, y) == 1
+
 
 # def test_test_failing():
 #     assert Example().value < 4

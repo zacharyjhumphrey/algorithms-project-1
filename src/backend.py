@@ -13,17 +13,7 @@ def convert_number_to_character(number: int) -> int:
 def generate_prime_number(lower_bound: int = 100000, upper_bound: int = 1000000) -> int:
     while (True):
         n = rnd.randint(lower_bound, upper_bound)
-        tested = set()
-        while len(tested) < 9:
-            a = rnd.randint(2, n - 2)
-
-            if a in tested:
-                continue
-            if not is_potentially_prime(a, n):
-                break
-
-            tested.add(a)
-        if len(tested) == 8:
+        if is_prime(n):
             return n
 
 
@@ -36,9 +26,8 @@ def generate_public_key(n: tuple) -> tuple:
     while (True):
         rand = rnd.randint(2, n[1])
         tested = set()
-        if (rand not in tested):
-            if (is_coprime(rand, n[1])):
-                return rand, n[0]
+        if rand not in tested and is_coprime(rand, n[1]):
+            return rand, n[0]
         tested.add(rand)
 
 
@@ -59,8 +48,8 @@ def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
 
 
 def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr:
-    # TODO test
-    return [  # TODO Code review. dont think this logic is right
+    # TODO Code review. dont think this logic is right
+    return [
         pow(
             convert_number_to_character(num), private_key[0]) % private_key[1]
         for num in message_to_decrypt
@@ -87,19 +76,21 @@ def is_potentially_prime(a: int, n: int) -> bool:
     return pow(a, n-1, n) == 1
 
 
+def is_prime(n: int):
+    # 99.9% certainty
+    # TODO Consider changing it bc low numbers wont work
+    return all(is_potentially_prime(a, n) for a in rnd.sample(range(2, n-2), 9))
+
+
 def is_coprime(number_to_check_if_coprime: int, N: int) -> bool:
-    # TODO test
-    if (gcd(number_to_check_if_coprime, N) == 1):
-        return True
-    return False
+    return gcd(number_to_check_if_coprime, N) == 1
 
 
 def gcd(a: int, b: int) -> int:
-    # TODO test
-    if (a < b):
-        return gcd(b, a)
-    if (a == 0):
+    if a == 0:
         return b
+    if b == 0:
+        return a
     return gcd(b, a % b)
 
 
