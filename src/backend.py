@@ -4,11 +4,11 @@ import random as rnd
 
 
 def convert_character_to_number(character: AnyStr) -> int:
-    return ord(character)
+    return ord(character) - ord(' ') + 1
 
 
 def convert_number_to_character(number: int) -> int:
-    return chr(number)
+    return chr(number + 31)
 
 
 def generate_prime_number(lower_bound: int = 100000, upper_bound: int = 1000000) -> int:
@@ -65,7 +65,7 @@ def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr
         message_to_decrypt, '')
 
 
-def generate_digital_signature(msg: AnyStr, private_key: tuple) -> int:
+def generate_digital_signature(msg: AnyStr, private_key: tuple) -> tuple:
     """
     generate_digital_signature creates a signature for the owner of keys
     This is used to to verify whether or not a message is verified.
@@ -78,14 +78,20 @@ def generate_digital_signature(msg: AnyStr, private_key: tuple) -> int:
         int: TODO
     """
     # TODO type message, but will it be a string or list of numbers
-    # TODO test
-    return pow(msg, private_key[1], private_key[0])  # probably incorrect
+    signature = []
+    for num in msg:
+        signature.append(pow(convert_character_to_number(num), private_key[0], private_key[1]))
+    return signature, msg
+    
 
 
-def authenticate_signature(msg: AnyStr, public_key: tuple, signature: int) -> bool:
+def authenticate_signature(msg: AnyStr, public_key: tuple, signature: list[int]) -> bool:
     # TODO test
     # probably incorrect
-    return pow(signature, public_key[1], public_key[0]) == msg
+    test = ""
+    for num in signature:
+        test = test + convert_number_to_character(pow(num, public_key[0], public_key[1]))
+    return test == msg
 
 
 def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:

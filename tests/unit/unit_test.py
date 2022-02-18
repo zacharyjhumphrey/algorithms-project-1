@@ -4,23 +4,13 @@ import pytest
 
 
 def test_convert_character_to_number():
-    try:
-        test = convert_character_to_number('A')
-        if (test != 1):
-            raise Exception
-        pass
-    except Exception:
-        pytest.fail("Unexpected Exception ..")
+    test = convert_character_to_number(' ')
+    assert(test == 1)
 
 
 def test_convert_number_to_character():
-    try:
-        test = convert_number_to_character(1)
-        if (test != 'A'):
-            raise Exception
-        pass
-    except Exception:
-        pytest.fail("Uncexpected Exception ..")
+    test = convert_number_to_character(1)
+    assert(test == " ")
 
 
 def test_generate_prime_number():
@@ -62,26 +52,23 @@ def test_generate_public_key():
 #     return 0
 
 def test_encrypt_message():
-    try:
-        test = encrypt_message((5, 14), "A")
-        if (test[0] != 1):
-            raise Exception
-        pass
-    except Exception:
-        pytest.fail("Unexpected Exception ..")
-
+    test = encrypt_message((5, 95), "A")
+    assert (test[0] == 59)
 
 def test_decrypt_message():
-    test = decrypt_message((11, 14), [1])
+    test = decrypt_message((11, 95), [59])
     assert test == "A"
-    test = decrypt_message((5, 14), [6])
+    test = decrypt_message((5, 95), [39])
     assert test == "F"
 
-# def test_generate_digital_signature(msg, private_key):
-#     pass
+def test_generate_digital_signature():
+    test = generate_digital_signature("A", (11, 95))
+    assert(test[0][0] == 79)
+    assert(test[1] == 'A')
 
-# def test_authenticate_signature(msg, public_key, private_key):
-#     pass
+def test_authenticate_signature():
+    test = authenticate_signature("A", (5, 95), [79])
+    assert(test)
 
 
 def test_get_count_coprime_number_count():
