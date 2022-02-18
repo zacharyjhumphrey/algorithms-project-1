@@ -2,11 +2,6 @@ from backend import *
 import random as rnd
 import pytest
 
-# def test_convert_character_to_number():
-#     pass
-#     # assert __convert_character_to_number('a') == 1
-#     # assert __convert_character
-
 
 def test_convert_character_to_number():
     try:
@@ -18,9 +13,6 @@ def test_convert_character_to_number():
         pytest.fail("Unexpected Exception ..")
 
 
-test_convert_character_to_number()
-
-
 def test_convert_number_to_character():
     try:
         test = convert_number_to_character(65)
@@ -29,9 +21,6 @@ def test_convert_number_to_character():
         pass
     except Exception:
         pytest.fail("Uncexpected Exception ..")
-
-
-test_convert_number_to_character()
 
 
 def test_generate_prime_number():
@@ -55,8 +44,9 @@ def test_generate_n():
     except Exception:
         pytest.fail("Unexpected Exception ..")
 
-# def test_generate_public_key():
-#       pass
+
+def test_generate_public_key():
+    pass
 
 # def test_generate_private_key(e, phi_N):
 #     return 0
@@ -90,9 +80,6 @@ def test_get_count_coprime_number_count():
         pytest.fail("Unexpected Exception ..")
 
 
-test_get_count_coprime_number_count()
-
-
 def test_is_potentially_prime():
     try:
         if (not is_potentially_prime(3, 7)):
@@ -104,16 +91,14 @@ def test_is_potentially_prime():
         pytest.fail("Unexpected Exception ..")
 
 
-test_is_potentially_prime()
+def test_is_coprime():
+    assert is_coprime(3, 5)
+    assert not is_coprime(3, 9)
 
-# def test_is_coprime(number_to_check_if_coprime, N):
-#     pass
-
-# def test_is_coprime():
-#     pass
 
 # def test_extended_gcd():
 #     pass
+
 
 def test_gcd():
     for i in range(10):
@@ -123,19 +108,15 @@ def test_gcd():
 
     for i in range(10):
         x = rnd.randint(2, 70)
-        y = 2 * rnd.randint(2, 70)
-        z = 3 * rnd.randint(2, 70)
+        y = 2 * x
+        z = 3 * x
         assert gcd(z, y) == x
 
 
 def test_gcd_with_prime_numbers():
     for i in range(10):
         x = generate_prime_number(80, 300)
-        y = 0
-        while y != x:
+        y = x
+        while y == x:
             y = rnd.randint(80, 300)
         assert gcd(x, y) == 1
-
-
-# def test_test_failing():
-#     assert Example().value < 4

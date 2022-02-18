@@ -73,6 +73,18 @@ def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:
 
 
 def is_potentially_prime(a: int, n: int) -> bool:
+    """
+    is_potentially_prime is used to compute whether or not a number is prime.
+    This function is correct about 50% of the time. Called multiple times with 
+    a different a value, this method can nearly assure that a number is prime.
+
+    Args:
+        a (int): _description_
+        n (int): _description_
+
+    Returns:
+        bool: _description_
+    """
     return pow(a, n-1, n) == 1
 
 
@@ -87,6 +99,16 @@ def is_coprime(number_to_check_if_coprime: int, N: int) -> bool:
 
 
 def gcd(a: int, b: int) -> int:
+    """
+    gcd returns the greatest common divisor
+
+    Args:
+        a (int): first number
+        b (int): second number
+
+    Returns:
+        int: great common denominator
+    """
     if a == 0:
         return b
     if b == 0:
@@ -105,3 +127,21 @@ def extended_gcd(a: int, b: int) -> tuple:
     y = x1
 
     return gcd, x, y
+
+
+# def get_factors(n: int) -> set[int]:
+#     ans = []
+#     if n == 1:
+#         return 1
+
+#     if n % 2 == 0:
+#         ans.append(n / 2)
+#         ans.append(get_factors(n / 2))
+#     if n % 3 == 0:
+#         ans.append(n / 3)
+#         ans.append(get_factors(n / 3))
+
+#     return ans
+
+
+# print(get_factors(6))
