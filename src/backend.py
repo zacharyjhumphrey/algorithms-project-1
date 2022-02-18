@@ -3,12 +3,10 @@ import random as rnd
 
 
 def convert_character_to_number(character: int) -> int:
-    # TODO Test
     return ord(character)
 
 
 def convert_number_to_character(number: int) -> int:
-    # TODO Test
     return chr(number)
 
 
@@ -24,6 +22,7 @@ def generate_n(p: int, q: int) -> tuple:
 
 
 def generate_public_key(n: tuple) -> tuple:
+    # TODO test
     while (True):
         rand = rnd.randint(2, n[1])
         tested = set()
@@ -33,12 +32,14 @@ def generate_public_key(n: tuple) -> tuple:
 
 
 def generate_private_key(e: int, n: tuple) -> tuple:
+    # TODO test
     return extended_gcd(e, n[1])[1], n[1]
 
 
 def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
     # TODO Code review
     # TODO Need to add private key?
+    # TODO test
     return [
         pow(
             convert_character_to_number(num), public_key[0]) % public_key[1]
@@ -57,20 +58,14 @@ def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr
 
 def generate_digital_signature(msg: AnyStr, private_key: tuple) -> int:
     # TODO type message, but will it be a string or list of numbers
+    # TODO test
     return pow(msg, private_key[1], private_key[0])  # probably incorrect
 
 
 def authenticate_signature(msg: AnyStr, public_key: tuple, signature: int) -> bool:
-    # TODO probably incorrect
+    # TODO test
+    # probably incorrect
     return pow(signature, public_key[1], public_key[0]) == msg
-
-    return pow(msg, private_key[1], private_key[0])  # probably incorrect
-
-
-def authenticate_signature(msg: AnyStr, public_key: tuple, signature: int) -> bool:
-    m = pow(signature, public_key[1], public_key[0])
-
-    return m == msg  # probably incorrect
 
 
 def get_count_coprime_number_count(prime_1: int, prime_2: int) -> int:
@@ -100,6 +95,7 @@ def gcd(a: int, b: int) -> int:
 
 
 def extended_gcd(a: int, b: int) -> tuple:
+    # TODO test
     if (a == 0):
         return b, 0, 1
 
