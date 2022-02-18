@@ -3,11 +3,11 @@ import random as rnd
 
 
 def convert_character_to_number(character: int) -> int:
-    return ord(character)
+    return ord(character) - ord('A') + 1
 
 
 def convert_number_to_character(number: int) -> int:
-    return chr(number)
+    return chr(number + 64) 
 
 
 def generate_prime_number(lower_bound: int = 100000, upper_bound: int = 1000000) -> int:
@@ -39,7 +39,6 @@ def generate_private_key(e: int, n: tuple) -> tuple:
 def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
     # TODO Code review
     # TODO Need to add private key?
-    # TODO test
     return [
         pow(
             convert_character_to_number(num), public_key[0]) % public_key[1]
@@ -49,11 +48,15 @@ def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
 
 def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr:
     # TODO Code review. dont think this logic is right
-    return [
-        pow(
-            convert_number_to_character(num), private_key[0]) % private_key[1]
-        for num in message_to_decrypt
-    ]
+    msg = ""
+    for num in message_to_decrypt:
+        msg = msg + convert_number_to_character(pow(num, private_key[0], private_key[1]))
+    return msg
+    # return [
+    #     pow(
+    #         convert_number_to_character(num), private_key[0]) % private_key[1]
+    #     for num in message_to_decrypt
+    # ]
 
 
 def generate_digital_signature(msg: AnyStr, private_key: tuple) -> int:
