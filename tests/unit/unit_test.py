@@ -6,7 +6,7 @@ import pytest
 def test_convert_character_to_number():
     try:
         test = convert_character_to_number('A')
-        if (test != 65):
+        if (test != 1):
             raise Exception
         pass
     except Exception:
@@ -15,7 +15,7 @@ def test_convert_character_to_number():
 
 def test_convert_number_to_character():
     try:
-        test = convert_number_to_character(65)
+        test = convert_number_to_character(1)
         if (test != 'A'):
             raise Exception
         pass
@@ -35,20 +35,37 @@ def test_generate_n():
     assert generate_n(2, 7) == (14, 6)
 
 
+<<<<<<< HEAD:tests/unit/unit_test.py
 def test_generate_public_key():
     n = generate_n(2, 7)
     key = generate_public_key(n)
     assert key == (5, 14)
 
+=======
+# def test_generate_public_key():
+#     pass
+>>>>>>> a919acd29146d4413dfb89aaef9d2b023207084b:tests/unit/example_test.py
 
 # def test_generate_private_key(e, phi_N):
 #     return 0
 
-# def test_encrypt_message(public_key, message_to_encrypt):
-#     pass
+def test_encrypt_message():
+    try:
+        test = encrypt_message((5, 14), "A")
+        if (test[0] != 1):
+            raise Exception
+        pass
+    except Exception:
+        pytest.fail("Unexpected Exception ..")
 
-# def test_decrypt_message(private_key, message_to_decrypt):
-#     pass
+def test_decrypt_message():
+    try:
+        test = decrypt_message((11, 14), [1])
+        if (test != "A"):
+            raise Exception
+        pass
+    except Exception:
+        pytest.fail("Unexpected Exception ..")
 
 # def test_generate_digital_signature(msg, private_key):
 #     pass
@@ -101,9 +118,9 @@ def test_gcd():
 
 
 def test_gcd_with_prime_numbers():
-    for i in range(10):
-        x = generate_prime_number(80, 300)
+    for i in range(1000):
+        x = generate_prime_number(150, 300)
         y = x
         while y == x:
-            y = rnd.randint(80, 300)
+            y = rnd.randint(80, 150)
         assert gcd(x, y) == 1
