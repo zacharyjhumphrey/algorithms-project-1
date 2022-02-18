@@ -49,7 +49,6 @@ def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
     """
     # TODO Code review
     # TODO Need to add private key?
-    # TODO test
     return [
         pow(
             convert_character_to_number(num), public_key[0], public_key[1])
@@ -66,9 +65,8 @@ def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr
                 pow(num, private_key[0], private_key[1]))
     return msg
     # return [
-    #     convert_number_to_character(
-    #         pow(num, private_key[0], private_key[1])
-    #     )
+    #     pow(
+    #         convert_number_to_character(num), private_key[0]) % private_key[1]
     #     for num in message_to_decrypt
     # ]
 
