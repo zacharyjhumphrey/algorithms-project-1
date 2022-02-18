@@ -8,10 +8,6 @@ import pytest
 #     # assert __convert_character
 
 
-# def test_convert_character_to_number():
-#     pass
-
-
 def test_generate_prime_number():
     # TODO Depends on is potentially prime passing
     for i in range(20):
@@ -21,7 +17,6 @@ def test_generate_prime_number():
                 print(f'generated prime is {prime}')
                 pytest.fail(
                     "Test generate prime number has returned a prime number")
-
 
 # def test_generate_public_key():
 #     pass
