@@ -22,11 +22,9 @@ using black format style
 python3
 pip
 
-### run tests
+## getting started
 
-python -m pytest tests
-
-## running the project
+### install the project
 
 pip install -e .
 
@@ -42,7 +40,10 @@ python -m venv .venv
 
 pip install -r requirements.txt
 
+### run tests
+
+pytest
+
 ### run main for test
 
-python main.py
-(should run without errors)
+python src/main.py
