@@ -61,8 +61,14 @@ def test_generate_n():
 # def test_generate_private_key(e, phi_N):
 #     return 0
 
-# def test_encrypt_message(public_key, message_to_encrypt):
-#     pass
+def test_encrypt_message(public_key, message_to_encrypt):
+    try:
+        test = encrypt_message((5, 14), "b")
+        if (test != 98):
+            raise Exception
+        pass
+    except Exception:
+        pytest.fail("Unexpected Exception ..")
 
 # def test_decrypt_message(private_key, message_to_decrypt):
 #     pass
@@ -104,9 +110,6 @@ test_is_potentially_prime()
 #     pass
 
 # def test_is_coprime():
-#     pass
-
-# def test_gcd():
 #     pass
 
 # def test_extended_gcd():
