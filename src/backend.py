@@ -1,3 +1,4 @@
+import functools
 from typing import AnyStr
 import random as rnd
 
@@ -33,7 +34,7 @@ def generate_public_key(n: tuple) -> tuple:
 
 def generate_private_key(e: int, n: tuple) -> tuple:
     # TODO test
-    return extended_gcd(e, n[1])[1], n[0]
+    return (extended_gcd(e, n[1])[1] % n[1]) + n[1], n[0]
 
 
 def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
@@ -58,17 +59,10 @@ def encrypt_message(public_key: tuple, message_to_encrypt: AnyStr) -> list[int]:
 
 def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr:
     # TODO Code review. dont think this logic is right
-    msg = ""
-    for num in message_to_decrypt:
-        msg = msg + \
-            convert_number_to_character(
-                pow(num, private_key[0], private_key[1]))
-    return msg
-    # return [
-    #     pow(
-    #         convert_number_to_character(num), private_key[0]) % private_key[1]
-    #     for num in message_to_decrypt
-    # ]
+    return functools.reduce(
+        lambda s, num: s + convert_number_to_character(
+            pow(num, private_key[0], private_key[1])),
+        message_to_decrypt, '')
 
 
 def generate_digital_signature(msg: AnyStr, private_key: tuple) -> int:

@@ -31,6 +31,23 @@ def test_generate_prime_number():
             assert prime % i != 0
 
 
+def test_private_key():
+    for i in range(10):
+        p = generate_prime_number()
+        q = generate_prime_number()
+        n = generate_n(p, q)
+        public_key = generate_public_key(n)
+        private_key = generate_private_key(public_key[0], n)
+        print(p, q)
+
+        msg = 'B'
+        e_msg = encrypt_message(public_key, msg)
+        d_msg = decrypt_message(private_key, e_msg)
+        print(d_msg)
+
+        # assert public_key[0] * private_key[0] % n[1] == 1
+
+
 def test_generate_n():
     assert generate_n(2, 7) == (14, 6)
 
@@ -55,13 +72,10 @@ def test_encrypt_message():
 
 
 def test_decrypt_message():
-    try:
-        test = decrypt_message((11, 14), [1])
-        if (test != "A"):
-            raise Exception
-        pass
-    except Exception:
-        pytest.fail("Unexpected Exception ..")
+    test = decrypt_message((11, 14), [1])
+    assert test == "A"
+    test = decrypt_message((5, 14), [6])
+    assert test == "F"
 
 # def test_generate_digital_signature(msg, private_key):
 #     pass

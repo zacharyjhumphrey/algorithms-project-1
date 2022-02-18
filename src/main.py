@@ -6,23 +6,24 @@ decrypted_msgs = []
 # stores messages after they are encrypted
 encrypted_msgs = []
 # stores signatures to be verified
-signatures = []
-public_key = None
-n = None
+signed_msgs = []
+n = b.generate_n(b.generate_prime_number(), b.generate_prime_number())
+public_key = b.generate_public_key(n)
+private_key = b.generate_private_key(public_key[0], n)
 
 
 def int_input(msg: AnyStr) -> int:
     return int(input(msg))
 
 
-def main():
+def main() -> None:
     while(True):
-        print('''
-Please select your user type:
-    1. A public user
-    2. The owner of the keys
-    3. Exit program
-        ''')
+        print(
+            'Please select your user type:',
+            '\t1. A public user',
+            '\t2. The owner of the keys',
+            '\t3. Exit program',
+            sep='\n')
 
         option = input("\nEnter your choice: ")
 
@@ -36,44 +37,35 @@ Please select your user type:
             print("please enter '1', '2', or '3'")
 
 
-def public_user_menu():
+def public_user_menu() -> None:
     while (True):
-        print('''      
-As a public user, what would you like to do?
-    1. Send an encrypted message
-    2. Authenticate a digital signature
-    3. Exit
-        ''')
+        print(
+            'As a public user, what would you like to do?',
+            '\t1. Send an encrypted message',
+            '\t2. Authenticate a digital signature',
+            '\t3. Exit',
+            sep='\n')
         option = input("\nEnter your choice: ")
-        global n
-        n = b.generate_n(b.generate_prime_number(), b.generate_prime_number())
-        n = (14, 6)
-        global public_key
-        public_key = b.generate_public_key(n)
 
-        # accepts message and stores in decryptedMsgs
         if option == "1":
-            # TODO Test
-            msg = input("\nEnter a message: ")
-            decrypted_msgs.append(msg)
-            # moves from decrypted to encrypted with basic encryption tester
-            encrypted_msgs.append(b.encrypt_message(public_key, msg))
+            # accepts message and stores in decrypted_msgs
+            encrypted_msgs.append(b.encrypt_message(
+                public_key, input("\nEnter a message: ")))
 
             print("message encrypted and sent.")
 
-        # checks for signatures
         elif option == "2":
-            if signatures == []:
+            # checks for signatures
+            if signed_msgs == []:
                 print("There are no signatures to authenticate")
                 continue
 
             # show signature options
-            # TODO Should this say signatures instead?
             print("The following messages are available:")
-            print(
-                [f'\t{i+1} . (length = {len(s)})\n' for i, s in enumerate(signatures)])
+            print(*[f'\t{i+1}. (length = {len(s)})'
+                    for i, s in enumerate(signed_msgs)], sep="\n")
 
-            selected_sig = signatures[int_input("Enter your choice: ")-1]
+            selected_sig = signed_msgs[int_input("Enter your choice: ")-1]
             print(selected_sig)
 
             # TODO add call to verify signature
@@ -84,48 +76,39 @@ As a public user, what would you like to do?
             print("please enter '1', '2', or '3'")
 
 
-def key_owner_menu():
+def key_owner_menu() -> None:
     while True:
-        # print menu
-        print('''
-As the owner of the keys, what would you like to do?
-    1. decrypt a received message
-    2. digitally sign a message
-    3. Exit
-        ''')
+        print(
+            'As the owner of the keys, what would you like to do?',
+            '\t1. decrypt a received message',
+            '\t2. digitally sign a message',
+            '\t3. Exit',
+            sep='\n')
 
-        # get user input
         option = input("\nEnter your choice: ")
 
-        # checks for enctyped messages
         if option == "1":
+            # checks for enctyped messages
             if encrypted_msgs == []:
                 print("There are no messages available.")
                 continue
 
             print("The following messages are available:")
-
-            # display encrypted Messages by length
-            print(
-                [f'\t{i+1} . (length = {len(s)})\n' for i, s in enumerate(encrypted_msgs)])
+            print(*[f'\t{i+1}. (length = {len(s)})'
+                    for i, s in enumerate(encrypted_msgs)], sep="\n")
 
             selected_msg = encrypted_msgs[int_input("Enter your choice: ")-1]
 
-            private_key = b.generate_private_key(public_key[0], n)
-            # TODO insert call to decryption method
-            print(b.decrypt_message(private_key, selected_msg))
-        # add signature to signatures list
+            print(
+                f'Decrypted message: {b.decrypt_message(private_key, selected_msg)}')
         elif option == "2":
-            signatures.append(input("Enter a message:"))
+            # add signature to signatures list
+            signed_msgs.append(input("Enter a message:"))
             print("Message signed and sent.")
-        # exit to main
         elif option == "3":
             break
-        # catch case
         else:
             print("please enter '1', '2', or '3'")
 
 
-# once mainMenu is ran stuck in recursive loop between menus
-# functions unless option 3 is selected while in the main menu
 main()
