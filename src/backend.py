@@ -4,11 +4,11 @@ import random as rnd
 
 
 def convert_character_to_number(character: AnyStr) -> int:
-    return ord(character) - ord('A') + 1
+    return ord(character)
 
 
 def convert_number_to_character(number: int) -> int:
-    return chr(number + 64)
+    return chr(number)
 
 
 def generate_prime_number(lower_bound: int = 100000, upper_bound: int = 1000000) -> int:
