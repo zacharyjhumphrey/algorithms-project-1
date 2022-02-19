@@ -136,7 +136,6 @@ def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr
     Returns:
         AnyStr: decrypted message
     """
-    # TODO Code review. dont think this logic is right
     return functools.reduce(
         lambda s, num: s + convert_number_to_character(
             pow(num, private_key[0], private_key[1])),
@@ -153,9 +152,8 @@ def generate_digital_signature(msg: AnyStr, private_key: tuple) -> Tuple[list[in
         private_key (tuple): key from the user that created the message
 
     Returns:
-        int: 
+        Tuple[list[int], AnyStr]: signed message, unsigned message
     """
-    # TODO code review
     signature = []
     for num in msg:
         signature.append(pow(convert_character_to_number(num),
