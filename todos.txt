@@ -1,0 +1,5 @@
+create user facing I/O implementation that calls the 'backend' for tasks
+write a report that documents our approach to the project
+create a unit test suite for testing individual functionality system pieces
+create integration test for the system as a whole
+create a function that 
