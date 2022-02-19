@@ -134,7 +134,7 @@ def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr
         message_to_decrypt (list[int]): message to decrypt
 
     Returns:
-        AnyStr: _description_
+        AnyStr: decrypted message
     """
     # TODO Code review. dont think this logic is right
     return functools.reduce(
@@ -143,7 +143,7 @@ def decrypt_message(private_key: tuple, message_to_decrypt: list[int]) -> AnyStr
         message_to_decrypt, '')
 
 
-def generate_digital_signature(msg: AnyStr, private_key: tuple) -> tuple:
+def generate_digital_signature(msg: AnyStr, private_key: tuple) -> Tuple[list[int], AnyStr]:
     """
     generate_digital_signature creates a signature for the owner of keys
     This is used to to verify whether or not a message is verified.
@@ -153,9 +153,9 @@ def generate_digital_signature(msg: AnyStr, private_key: tuple) -> tuple:
         private_key (tuple): key from the user that created the message
 
     Returns:
-        int: TODO
+        int: 
     """
-    # TODO type message, but will it be a string or list of numbers
+    # TODO code review
     signature = []
     for num in msg:
         signature.append(pow(convert_character_to_number(num),
@@ -164,8 +164,20 @@ def generate_digital_signature(msg: AnyStr, private_key: tuple) -> tuple:
 
 
 def authenticate_signature(msg: AnyStr, public_key: tuple, signature: list[int]) -> bool:
-    # TODO test
-    # probably incorrect
+    """
+    authenticate_signature decrypts an encrypted string and returns whether or not it matches the 
+    unencrypted string
+
+    Args:
+        msg (AnyStr): unencrypted message
+        public_key (tuple): public key
+        signature (list[int]): signed message (encrypted version of msg)
+
+    Returns:
+        bool: whether or not this is a valid signature
+    """
+    # TODO doc me
+    # TODO code review
     test = ""
     for num in signature:
         test = test + \
@@ -260,14 +272,14 @@ def gcd(a: int, b: int) -> int:
 
 def extended_gcd(a: int, b: int) -> Tuple[int, int, int]:
     """
-    extended_gcd TODO docme
+    extended_gcd returns the greatest common factor of two numbers
 
     Args:
-        a (int): _description_
-        b (int): _description_
+        a (int): number 1
+        b (int): number 2
 
     Returns:
-        Tuple[int, int, int]: _description_
+        Tuple[int, int, int]: gcd, d (decryption code), k
     """
     # TODO test
     if a == 0:

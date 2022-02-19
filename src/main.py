@@ -66,9 +66,8 @@ def public_user_menu() -> None:
                     for i, s in enumerate(signed_msgs)], sep="\n")
 
             selected_sig = signed_msgs[int_input("Enter your choice: ")-1]
-            print(selected_sig)
-
-            # TODO add call to verify signature
+            print('signature is valid' if b.authenticate_signature(
+                selected_sig[1], public_key, selected_sig[0]) else 'signature is invalid')
 
         elif option == "3":
             break
@@ -103,7 +102,8 @@ def key_owner_menu() -> None:
                 f'Decrypted message: {b.decrypt_message(private_key, selected_msg)}')
         elif option == "2":
             # add signature to signatures list
-            signed_msgs.append(input("Enter a message:"))
+            signed_msgs.append(b.generate_digital_signature(
+                input("Enter a message:"), private_key))
             print("Message signed and sent.")
         elif option == "3":
             break
